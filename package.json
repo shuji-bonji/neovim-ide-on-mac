@@ -1,0 +1,14 @@
+{
+  "name": "neovim-ide-on-mac",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zenn Book: AI駆動開発時代のNeovim（Mac × ローカルLLM × tmux）",
+  "scripts": {
+    "preview": "zenn preview",
+    "new:article": "zenn new:article",
+    "new:book": "zenn new:book"
+  },
+  "dependencies": {
+    "zenn-cli": "^0.5.2"
+  }
+}
