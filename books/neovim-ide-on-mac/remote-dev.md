@@ -195,6 +195,10 @@ ssh localllm 'git clone <your-dotfiles-repo> ~/.config/nvim'
 
 GNU Stow / chezmoi のような dotfiles マネージャを使うと、より体系的に管理できます。
 
+:::message alert
+**「SSH 越しだと `<leader>` が全部効かない」はキー転送の問題ではありません。** 方式 A では Neovim はリモート（localllm）の `~/.config/nvim` を読みます。リモート側だけモデル指定などが古く、プラグイン設定が起動時にエラーすると、**init.lua がそこで止まり、以降のキーマップ（`<leader>` 群）が丸ごと未登録**になります。Space 自体は SSH でも tmux でも普通に通るので、まず `:messages` で起動エラーを、`:echo $MYVIMRC` / `:checkhealth` で設定・プラグインの読み込みを確認してください（未 pull モデルが原因になりやすい点は neovim-llm 章の FIM 注意を参照）。
+:::
+
 ## 方式 B / C を選ぶ目安 (簡潔に)
 
 ### B. SSHFS / Mutagen (リモートを手元にマウント)

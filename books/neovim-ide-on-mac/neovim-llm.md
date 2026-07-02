@@ -272,6 +272,10 @@ ollama show starcoder2:7b  # → completion + insert            = FIM 可
 そのため **FIM 既定は `starcoder2:7b`**（BigCode、`insert` 対応・多言語に強い）を採用します。本プロジェクトの方針上、`qwen2.5-coder` / `deepseek-coder` 等は使いません。localllm 側のモデル知見は、姉妹本 [`local-llm-on-mac`](https://github.com/shuji-bonji/local-llm-on-mac) が詳しいです。
 :::
 
+:::message alert
+**`model` は必ず `ollama list` にある（pull 済みの）名前を指定すること。** 未 pull のモデル名を書くと、補完が出ないだけでなく、**プラグイン設定が起動時にエラーし、init.lua がそこで中断 → それ以降に書いたキーマップ（`<leader>` 群）が丸ごと未登録**になることがあります。「なぜか `<leader>` が全部効かない」の正体は、たいていこれです。まず `:messages` で起動時エラーを確認し、`ssh localllm 'ollama list'` と指定モデル名を突き合わせてください（FIM 既定の `starcoder2:7b` は pull 済み前提）。
+:::
+
 :::message
 **「`codellama:7b` は FIM 不可」は minuet の方式に限った話です。** FIM の実装には 2 通りあります。**① エディタ側が FIM プロンプト (`<PRE>/<SUF>/<MID>` 等) を自前で組み、ただの `completion` として送る**方式（例: VS Code の Continue）は `insert` が不要なので `codellama:7b` でも動きます。**② `/v1/completions` の `suffix` を送って FIM 化を Ollama に委ねる**方式（minuet はこちら）は `insert` capability が必須です。同じ FIM でも経路によってモデル要件が変わる。ここが面白いところです。
 :::
