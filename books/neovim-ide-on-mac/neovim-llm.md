@@ -288,16 +288,6 @@ ollama show starcoder2:7b  # → completion + insert            = FIM 可
 
 これで「自前のローカル LLM を Neovim に繋ぐ」側は完成です。次章では、intro で予告したもう片方の主役——**クラウドの Claude Code を Neovim の IDE に統合する** ([neovim-claudecode 章](neovim-claudecode.md))——を組み、ローカルとクラウドの 2 系統をエディタ 1 つに同居させます。
 
-:::message
-**L3/L4 リンク機会メモ**:
-
-- codecompanion の「アダプタ抽象で LLM バックエンドを差し替える」設計は、
-  L3 の **LLM Gateway (LiteLLM)** の I/F 抽象と同じ発想。Neovim ⇄ codecompanion ⇄ Ollama の三層は、
-  アプリ ⇄ Gateway ⇄ モデルの縮図。[`local-llm-on-mac`](https://github.com/shuji-bonji/local-llm-on-mac) と接続できます。
-- コード支援に「tool calling 対応モデルか」が効く点は、L4 の **Knowledge / Capability Boundary** に対応。
-- `zennbook-toc-memo.md` の L3/L4 リンク表に追記候補。
-  :::
-
 ## アンインストール手順
 
 ```bash

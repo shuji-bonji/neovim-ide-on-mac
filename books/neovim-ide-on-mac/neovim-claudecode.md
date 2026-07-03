@@ -23,12 +23,12 @@ IDE 統合を、[claudecode.nvim](https://github.com/coder/claudecode.nvim) で 
 本章は「**クラウドのエージェント (Claude Code)** をエディタに統合する」話です。intro で予告した
 「クラウドの Claude Code から、自前のローカル LLM まで」の**クラウド側の口**がここで埋まります。
 
-| 観点 | 前章 (codecompanion / minuet) | 本章 (claudecode.nvim) |
-| ---- | ----------------------------- | ---------------------- |
-| 頭脳 | localllm (Ollama) | クラウド (Anthropic) |
-| 得意 | チャット・FIM 補完・機密コードの相談 | 設計・多ファイル編集・自律タスク |
-| コードの扱い | LAN の外に出ない | **クラウドに送られる** |
-| コスト | ¥0 (電気代のみ) | サブスクリプション / API 課金 |
+| 観点         | 前章 (codecompanion / minuet)        | 本章 (claudecode.nvim)           |
+| ------------ | ------------------------------------ | -------------------------------- |
+| 頭脳         | localllm (Ollama)                    | クラウド (Anthropic)             |
+| 得意         | チャット・FIM 補完・機密コードの相談 | 設計・多ファイル編集・自律タスク |
+| コードの扱い | LAN の外に出ない                     | **クラウドに送られる**           |
+| コスト       | ¥0 (電気代のみ)                      | サブスクリプション / API 課金    |
 
 :::message alert
 **Claude Code に送ったコードはクラウドに出ます。** 機密リポジトリはローカル LLM (前章)、
@@ -197,16 +197,16 @@ flowchart LR
 
 ## トラブルシュート
 
-| 症状 | 原因と対処 |
-| ---- | ---------- |
-| claude が IDE を認識しない | `:ClaudeCodeStatus` でサーバ確認 → `ls ~/.claude/ide/` に lock があるか (`$CLAUDE_CONFIG_DIR` 設定時はそちらの `ide/`) |
-| `/ide` に Neovim が出ない | nvim と claude が**別マシン**で動いている。同一マシンに揃える |
-| nvim 内ターミナルで claude が見つからない | シェル alias は nvim に届かない。`terminal_cmd` に `which claude` の実パス |
-| ターミナル表示が乱れる | `provider = "native"` に切替 (snacks 起因の切り分け) |
-| diff が勝手に承認される | auto-save プラグイン (上記 alert)。除外 condition を追加 |
-| diff 承認キーが効かない (却下は効く) | 承認キーがバッファローカルマップに奪われている (上記 alert)。`:verbose nmap` で確認。`:w` なら常に通る |
+| 症状                                      | 原因と対処                                                                                                                                                                            |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| claude が IDE を認識しない                | `:ClaudeCodeStatus` でサーバ確認 → `ls ~/.claude/ide/` に lock があるか (`$CLAUDE_CONFIG_DIR` 設定時はそちらの `ide/`)                                                                |
+| `/ide` に Neovim が出ない                 | nvim と claude が**別マシン**で動いている。同一マシンに揃える                                                                                                                         |
+| nvim 内ターミナルで claude が見つからない | シェル alias は nvim に届かない。`terminal_cmd` に `which claude` の実パス                                                                                                            |
+| ターミナル表示が乱れる                    | `provider = "native"` に切替 (snacks 起因の切り分け)                                                                                                                                  |
+| diff が勝手に承認される                   | auto-save プラグイン (上記 alert)。除外 condition を追加                                                                                                                              |
+| diff 承認キーが効かない (却下は効く)      | 承認キーがバッファローカルマップに奪われている (上記 alert)。`:verbose nmap` で確認。`:w` なら常に通る                                                                                |
 | SSH 先で `claude doctor` が Keychain 警告 | SSH セッションではログインキーチェーンがロックされ資格情報の**新規保存**のみ失敗。ログイン済みなら実害なし。必要なら `security unlock-keychain ~/Library/Keychains/login.keychain-db` |
-| 詳細ログが見たい | `log_level = "debug"` を opts に |
+| 詳細ログが見たい                          | `log_level = "debug"` を opts に                                                                                                                                                      |
 
 ## ここまでの到達点
 
@@ -216,19 +216,6 @@ flowchart LR
 
 これで intro の予告 ——「クラウドの Claude Code から、自前のローカル LLM まで」—— が両輪とも揃いました。
 次章では、この作業机 (tmux) にエージェントを並べて協働させます。
-
-:::message
-**L3/L4 リンク機会メモ**:
-
-- **lock ファイル + WebSocket による IDE 発見機構**は、L3 (`ai-agent-architecture`) の
-  「エージェントはどうやって Tools / 環境を発見するか」(discovery) のローカル IPC 版。
-  MCP のトランスポートが stdio / HTTP だけでなく WebSocket 変種として現れた実例。
-- **公式拡張のリバースエンジニアリングで同一プロトコルを再実装できた**事実は、
-  「プロトコルが公開契約ならクライアントは差し替え可能」という LSP → MCP 系譜の傍証。
-- **selection tracking = エディタ状態の自動コンテキスト注入**は、L4 の Context Window 予算の話。
-  便利な反面、無自覚にコンテキストを消費する。`:ClaudeCodeAdd` の行範囲指定はその手動制御弁。
-- `zennbook-toc-memo.md` の L3/L4 リンク表に追記候補。
-  :::
 
 ## アンインストール手順
 

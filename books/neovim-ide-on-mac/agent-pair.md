@@ -356,16 +356,6 @@ flowchart LR
 A（人間同士）は確実に使えて、B（エージェント横並び）は localllm でも今すぐ実用になります。
 C（エージェントが tmux を操作）は面白いものの、モデル選定が要る——この温度感で整理できます。
 
-:::message
-**L3/L4 リンク機会メモ**:
-
-- C 層の「目 (capture-pane) と手 (send-keys) を与える」設計は、L3 (`ai-agent-architecture`) の
-  **エージェントに環境を観測・作用させる Tool/Environment Layer** の最小実装。tmux はその素朴な代替環境。
-- B 層で CLI を `--openai-api-base` で差し替える点は、L3 の **LLM Gateway 抽象** と同型。
-- tool calling の質が成否を分けるのは、L4 (`understanding-llm-through-claude-code`) の
-  **Capability Boundary** に対応。`zennbook-toc-memo.md` の L3/L4 リンク表に追記候補。
-  :::
-
 ## アンインストール手順 (フェーズ C 用)
 
 ```bash
