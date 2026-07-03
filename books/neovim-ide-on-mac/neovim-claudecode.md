@@ -17,6 +17,8 @@ IDE 統合を、[claudecode.nvim](https://github.com/coder/claudecode.nvim) で 
 前章の [neovim-llm](neovim-llm.md) (ローカル LLM 連携) とは**併存**できます。むしろ併存が本書の狙いです。
 :::
 
+![](/images/tmux-claude.png)
+
 ## 位置づけ — 前章のローカル LLM と何が違うか
 
 前章で組んだ codecompanion / minuet は「**自前のローカル LLM** をエディタに繋ぐ」話でした。
