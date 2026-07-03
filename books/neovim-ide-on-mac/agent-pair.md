@@ -327,7 +327,7 @@ aider --openai-api-base http://localllm:11434/v1 \
       --model gemma2:9b           # localllm に pull 済みのモデル名に合わせる
 ```
 
-Claude Code はそのままだと **クラウド（Anthropic）で動く**ので、tmux ペインで起動すればすぐクラウドエージェントとして協働に加われます（intro の「クラウドの Claude Code から」はこの経路です）。**localllm に向けたいときだけ**、間に **LiteLLM** を噛ませて localllm にプロキシします。localllm 側に LiteLLM Proxy を載せる構成は姉妹本 [`local-llm-on-mac`](https://github.com/shuji-bonji/local-llm-on-mac) で扱っており、その口を使えば Claude Code のようなツールも localllm に向けられます。
+Claude Code はそのままだと **クラウド（Anthropic）で動く**ので、tmux ペインで起動すればすぐクラウドエージェントとして協働に加われます。さらに前章 ([neovim-claudecode](neovim-claudecode.md)) の `provider = "none"` を使えば、**そのペインの Claude Code に Neovim との IDE 接続 (選択共有・エディタ内 diff) を通したまま**この協働レイアウトに参加させられます。**localllm に向けたいときだけ**、間に **LiteLLM** を噛ませて localllm にプロキシします。localllm 側に LiteLLM Proxy を載せる構成は姉妹本 [`local-llm-on-mac`](https://github.com/shuji-bonji/local-llm-on-mac) で扱っており、その口を使えば Claude Code のようなツールも localllm に向けられます。
 
 ### 鍵2: モデルの tool calling 能力（本質的制約）
 

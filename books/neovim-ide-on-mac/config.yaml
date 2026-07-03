@@ -17,6 +17,7 @@ chapters:
   - neovim-tmux
   - remote-dev
   - neovim-llm
+  - neovim-claudecode
   - agent-pair
   - outro
   - cheatsheet

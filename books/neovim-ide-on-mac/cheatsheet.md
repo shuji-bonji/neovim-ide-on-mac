@@ -143,6 +143,19 @@ telescope 内: 入力で絞り込み → `Ctrl-j`/`Ctrl-k` で候補移動 → `
 | 保存時 prettier 整形       | (自動 / conform)                |
 | 対話チュートリアル         | `nvim +Tutor`                   |
 
+## 12. AI 連携 — ローカル LLM (`a*`) / Claude Code (`c*`) 🔧
+
+| やること (頭脳)                       | キー                            |
+| ------------------------------------- | ------------------------------- |
+| AI アクション / チャット (localllm)   | `<leader>aa` / `<leader>ac`     |
+| 選択をインライン処理 (localllm)       | Visual `<leader>ai`             |
+| 選択をチャットへ追加 (localllm)       | Visual `ga`                     |
+| FIM ゴースト補完の確定 / 消す         | `Tab` / `Ctrl-e` (insert 中)    |
+| Claude トグル / フォーカス            | `<leader>cc` / `<leader>cf`     |
+| Claude 再開 / モデル選択              | `<leader>cr` / `<leader>cm`     |
+| バッファ / 選択を Claude へ           | `<leader>cb` / Visual `<leader>cs` |
+| Claude の diff 承認 / 却下            | `<leader>cy` / `<leader>cn` (または `:w` / `:q`) |
+
 ## `<leader>` (Space) 早見
 
 ```
@@ -151,6 +164,8 @@ Space + q   閉じる          Space + rn   リネーム
 Space + ff  ファイル検索    Space + ca   コードアクション
 Space + fg  全文検索        Space + fb   バッファ一覧
 Space + fd  診断一覧
+Space + a*  ローカル LLM    Space + c*   Claude Code
+  (aa アクション / ac チャット)   (cc トグル / cs 送る / cy 承認 / cn 却下)
 ```
 
 :::message
