@@ -18,23 +18,26 @@ title: 'はじめに — AI 駆動開発時代の「IDE」を組む'
 
 ```mermaid
 flowchart TB
-    S["第1部 環境構築<br/>Homebrew で一括導入"] --> G["第2部 ターミナル<br/>Ghostty（描画担当）"]
-    G --> T["第3部 tmux<br/>消えない作業机"]
-    T --> V["第4部 Neovim<br/>基礎操作 → 0.12 コアで IDE 化"]
-    V --> X["第5部 tmux×Neovim 統合"]
-    X --> C["第6部 ★主役<br>ローカル LLM 接続<br>(SSH / Ollama / <br>エージェント協働)"]
+    S["第1部 環境構築（Chapter 2）<br/>Homebrew で一括導入"] --> G["第2部 ターミナル（Chapter 3）<br/>Ghostty（描画担当）"]
+    G --> T["第3部 tmux（Chapter 4〜5）<br/>役割分担の整理 → 消えない作業机"]
+    T --> V["第4部 Neovim（Chapter 6〜7）<br/>基礎操作 → 0.12 コアで IDE 化"]
+    V --> X["第5部 tmux×Neovim 統合（Chapter 8）"]
+    X --> C["第6部 ★主役 AI 駆動（Chapter 9〜12）<br/>SSH リモート / ローカル LLM<br/>claudecode.nvim / エージェント協働"]
+    C --> A["おわりに・付録（Chapter 13〜15）<br/>チートシート / rg・fd・fzf"]
     style S fill:#dbeafe,stroke:#1d4ed8,color:#000
     style C fill:#dcfce7,stroke:#15803d,color:#000
 ```
 
-- **第1部（環境準備）:**
+- **第1部（環境準備 / Chapter 2）:**
   必要なツール（Ghostty / tmux / Neovim 0.12 / Nerd Font / 補助コマンド）を Homebrew で一括導入します。ここではインストールと確認のみに留めます。
-- **第2〜3部（画面と端末）:**
-  描画担当の Ghostty と、作業空間を維持する tmux を扱います。ここは要点を絞って解説します。
-- **第4〜5部（IDE 化）:**
+- **第2〜3部（画面と端末 / Chapter 3〜5）:**
+  描画担当の Ghostty と、作業空間を維持する tmux を扱います。tmux 本編の前に「ターミナルエミュレータと tmux は誰が何をしているのか」で両者の役割分担を整理してから進みます。
+- **第4〜5部（IDE 化 / Chapter 6〜8）:**
   まず Neovim の基礎操作（モーダル編集）を素振りし、0.12 のコア機能をベースに IDE 化を進め、さらに tmux とシームレスに統合します。
-- **第6部（AI 駆動）:**
+- **第6部（AI 駆動 / Chapter 9〜12）:**
   SSH 越しのリモート編集、Ollama を使ったローカル LLM 接続、**Claude Code の Neovim IDE 統合（claudecode.nvim）**、tmux でのエージェント協働を構築します。クラウドの API だけでなく、**ローカル LLM まで自前で動かす**仕組みこそ、本書最大の差別化ポイントです。
+- **おわりに・付録（Chapter 13〜15）:**
+  巻末に、本書全体のキー操作をまとめた**チートシート（早見表）**と、単体でも強力な **rg / fd / fzf の使い方**を置いています。
 
 ## 一周すると、できるようになること
 
