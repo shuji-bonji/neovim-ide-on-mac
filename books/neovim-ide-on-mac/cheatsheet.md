@@ -8,6 +8,9 @@ title: "付録 — チートシート（早見表）"
 このプロジェクトの `init.lua` (setup 章 + neovim-ide 章) を前提にした早見表です。
 **印の意味**: 🔧 = 本設定で追加したキーマップ / 無印 = Neovim 標準操作。
 **`<leader>` = `Space`**（先頭がスペースのものは全部これ）。困ったら `Esc` 連打で Normal に戻ります。
+
+🔧 キーの**使い方 (操作の流れ) の説明は導入元の章**にあります:
+検索・ファイラ・LSP・git 差分 = [neovim-ide 章](neovim-ide.md) / ローカル LLM (`a*`) = [neovim-llm 章](neovim-llm.md)の「使い方」/ Claude Code (`c*`) = [neovim-claudecode 章](neovim-claudecode.md)の「使い方」/ tmux 連携 = [neovim-tmux 章](neovim-tmux.md)
 :::
 
 ## 1. モード
@@ -145,10 +148,16 @@ telescope 内: 入力で絞り込み → `Ctrl-j`/`Ctrl-k` で候補移動 → `
 
 ## 12. AI 連携 — ローカル LLM (`a*`) / Claude Code (`c*`) 🔧
 
+操作の流れ (開始 → 入力 → 終了) は各章の「使い方」を参照してください:
+ローカル LLM は [neovim-llm 章](neovim-llm.md)、Claude Code は [neovim-claudecode 章](neovim-claudecode.md)。
+
 | やること (頭脳)                       | キー                            |
 | ------------------------------------- | ------------------------------- |
 | AI アクション / チャット (localllm)   | `<leader>aa` / `<leader>ac`     |
+| チャット送信                          | Normal `<CR>` (insert 中は `<C-CR>`) |
+| チャット内: キー一覧 / 中断 / コードをヤンク | `?` / `q` / `gy`          |
 | 選択をインライン処理 (localllm)       | Visual `<leader>ai`             |
+| インライン diff の採用 / 破棄         | `gda` / `gdr`                   |
 | 選択をチャットへ追加 (localllm)       | Visual `ga`                     |
 | FIM ゴースト補完の確定 / 消す         | `Tab` / `Ctrl-e` (insert 中)    |
 | Claude トグル / フォーカス            | `<leader>cc` / `<leader>cf`     |
