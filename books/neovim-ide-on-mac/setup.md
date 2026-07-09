@@ -114,7 +114,7 @@ node -v                    # v20 以降が目安
 
 - **`rg`（ripgrep）** — `grep` の高速版。`rg "検索語"` でカレントディレクトリ配下を再帰検索できます。 → [コマンド紹介シリーズ：rg](https://zenn.dev/akasan/articles/25f1eca029854b)
 - **`fd`** — `find` の使いやすい代替。`fd 名前` でファイルを高速に探せます。 → [fd（`find` の高速な代替）](https://zenn.dev/21f/articles/fd-find-alternative)
-- **`fzf`** — 任意のリストを対話的に絞り込むファジーファインダ。`ls | fzf` や履歴検索（`Ctrl-R`）など、パイプで何でも絞れます。 → [あいまい検索 fzf のすゝめ](https://zenn.dev/nowa0402/articles/5eb780280f2523)
+- **`fzf`** — 任意のリストを対話的に絞り込むファジーファインダ。`ls | fzf` や履歴検索（`Ctrl-r`）など、パイプで何でも絞れます。 → [あいまい検索 fzf のすゝめ](https://zenn.dev/nowa0402/articles/5eb780280f2523)
 
 各ツールを単体で使い込みたい人は、上のリンク記事が分かりやすいです。
 :::

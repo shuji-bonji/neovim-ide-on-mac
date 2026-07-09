@@ -321,8 +321,8 @@ flowchart TD
 まずはエージェント CLI を **localllm の OpenAI 互換エンドポイントに向けます**。
 
 ```bash
-# aider を localllm の Ollama に直結する例
-aider --openai-api-base http://localllm:11434/v1 \
+# aider を localllm の Ollama に直結する例 (手元で動かす場合。localllm 上なら http://localhost:11434/v1)
+aider --openai-api-base http://localllm.local:11434/v1 \
       --openai-api-key ollama \
       --model gemma2:9b           # localllm に pull 済みのモデル名に合わせる
 ```

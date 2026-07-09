@@ -288,7 +288,7 @@ sequenceDiagram
 
 ## ステップ 4: ファジー検索 (telescope)
 
-これは VS Code の `Cmd+P` や全文検索に相当する機能です。
+これは VS Code の `Cmd+p` や全文検索に相当する機能です。
 setup 章で入れた `ripgrep` / `fd` がここで効いてきます。
 
 ```lua
@@ -303,8 +303,8 @@ vim.keymap.set("n", "<leader>fd", telescope.diagnostics,{ desc = "診断一覧" 
 
 | キー         | 何が開くか                | VS Code 相当  |
 | ------------ | ------------------------- | ------------- |
-| `<leader>ff` | ファイル名で開く          | `Cmd+P`       |
-| `<leader>fg` | プロジェクト全文検索      | `Cmd+Shift+F` |
+| `<leader>ff` | ファイル名で開く          | `Cmd+p`       |
+| `<leader>fg` | プロジェクト全文検索      | `Cmd+Shift+f` |
 | `<leader>fb` | 開いているバッファ一覧    | タブ一覧      |
 | `<leader>fd` | 診断（エラー / 警告）一覧 | Problems      |
 

@@ -66,6 +66,17 @@ ssh localllm
 brew install neovim tmux ripgrep fd node
 ```
 
+続けて、**localllm 側の `~/.zshenv` に PATH を通しておきます** (重要):
+
+```bash
+# localllm 上で実行 (~/.zshenv が無ければ作られる)
+echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshenv
+```
+
+:::message alert
+**これを飛ばすと、この章のワンライナーがほぼ全部 `command not found` になります**。`ssh localllm 'tmux ...'` や後述のエイリアス `ssh -t localllm "tmux new -As dev"` のような**リモートコマンド実行は非対話シェル**で走り、読まれる設定は `.zshenv` だけです (`.zshrc` は対話専用、Homebrew が PATH を書く `.zprofile` はログインシェル専用)。Apple Silicon の Homebrew (`/opt/homebrew/bin`) は既定 PATH に入っていないため、brew で入れた tmux / nvim / ollama が非対話シェルから見えません。環境変数は `.zshenv`、プロンプトやエイリアスは `.zshrc`、が zsh の設計上の役割分担です。
+:::
+
 localllm 側にも setup 章 / neovim-ide 章 の設定を置きます
 (後述の dotfiles 同期で楽にできます)。
 
@@ -95,6 +106,7 @@ Host localllm
   ServerAliveInterval 30    # 切断検知を早める
 ```
 
+この短い名前が効くのは **ssh / scp / rsync だけ** です。HTTP でアクセスする場面 (curl や [neovim-llm 章](neovim-llm.md) のアダプタ URL) では mDNS の正式名 **`localllm.local`** か IP を書いてください。素の `localllm` は DNS では解決できません。
 :::
 
 ## 応用: エージェントをヘッドレスで自走させる

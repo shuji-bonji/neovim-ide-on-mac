@@ -14,8 +14,12 @@ Neovim に **codecompanion.nvim** を入れ、localllm (Ollama / OpenAI 互換 A
 
 :::message
 **前提**: [neovim-ide 章](neovim-ide.md) で IDE 化済み。
-localllm が稼働し、`http://localllm:11434` で Ollama API が叩けること
+localllm が稼働し、`http://localllm.local:11434` で Ollama API が叩けること
 ([`local-llm-on-mac`](https://github.com/shuji-bonji/local-llm-on-mac))。
+:::
+
+:::message alert
+**ホスト名は `.local` まで書くこと**。`~/.ssh/config` の `Host localllm` という短い名前は **ssh / scp / rsync にしか効きません**。HTTP でアクセスする本章の URL (codecompanion / minuet / curl) は DNS・mDNS で名前を引くため、mDNS (Bonjour) の正式名 **`localllm.local`** か LAN の IP を書く必要があります。`http://localllm:11434` のように書くと名前解決に失敗します。
 :::
 
 ## 全体像
@@ -67,7 +71,7 @@ vim.pack.add({
 
 ## ステップ 2: localllm を向くアダプタを定義
 
-続いて、`http://localllm:11434` の Ollama に向く OpenAI 互換アダプタを作っていきましょう。
+続いて、`http://localllm.local:11434` の Ollama に向く OpenAI 互換アダプタを作っていきましょう。
 
 ```lua
 require("codecompanion").setup({
@@ -77,7 +81,7 @@ require("codecompanion").setup({
       localllm = function()
         return require("codecompanion.adapters").extend("openai_compatible", {
           env = {
-            url = "http://localllm:11434",     -- localllm の Ollama。LAN の IP でも可
+            url = "http://localllm.local:11434",     -- localllm の Ollama。LAN の IP でも可
             api_key = "TERM",                  -- Ollama はキー不要。実在する環境変数 TERM をダミーに流用
             chat_url = "/v1/chat/completions",
           },
@@ -189,7 +193,7 @@ flowchart TD
 
 ```bash
 # 事前に localllm で疎通確認
-curl http://localllm:11434/v1/models     # OpenAI 互換のモデル一覧が返る
+curl http://localllm.local:11434/v1/models     # OpenAI 互換のモデル一覧が返る
 ```
 
 Neovim で `.ts` を開いて `<leader>ac` を押し、何か質問して localllm が応答すれば成功です。
@@ -210,8 +214,9 @@ flowchart TD
 
 | 症状              | 確認                                   | 対処                                                           |
 | ----------------- | -------------------------------------- | -------------------------------------------------------------- |
-| 接続できない      | `curl http://localllm:11434/v1/models` | Ollama 起動・ファイアウォール・`localllm` 名前解決を確認       |
+| 接続できない      | `curl http://localllm.local:11434/v1/models` | Ollama 起動・ファイアウォール・URL が `.local` まで書かれているか (冒頭の alert) |
 | `model not found` | `ssh localllm 'ollama list'`           | `model.default` を pull 済み名に合わせる                       |
+| `ssh localllm '...'` が `command not found` | `ssh localllm 'echo $PATH'` | 非対話シェルは `.zshenv` しか読まない。localllm 側の `~/.zshenv` に `export PATH="/opt/homebrew/bin:$PATH"` ([remote-dev 章](remote-dev.md) 参照) |
 | 応答が遅い        | localllm のメモリ使用                  | より軽いモデルへ。`num_ctx` を絞る (Open WebUI の知見が流用可) |
 | 文字化け/途切れ   | アダプタ設定                           | `openai_compatible` で `/v1` パスが正しいか確認                |
 
@@ -236,7 +241,7 @@ require("minuet").setup({
     openai_fim_compatible = {
       api_key   = "TERM",   -- Ollama はキー不要。実在する環境変数 TERM をダミーに
       name      = "Ollama",
-      end_point = "http://localllm:11434/v1/completions",
+      end_point = "http://localllm.local:11434/v1/completions",
       model     = "starcoder2:7b",  -- FIM(insert)対応モデルを指定 (下の :::message 参照)
       optional  = { max_tokens = 56, top_p = 0.9 },
     },
@@ -257,7 +262,7 @@ require("minuet").setup({
 :::message alert
 **`dismiss` に `<Esc>` を割り当ててはいけません**。`auto_trigger` でほぼ常にゴースト候補が出ているため、
 insert モードの `<Esc>` が minuet の「候補消し」に奪われ、**ノーマルモードに戻れなくなります**
-(Ctrl+C なら抜けられるので切り分けできます)。`dismiss` は補完の慣例どおり `<C-e>` にして、
+(Ctrl+c なら抜けられるので切り分けできます)。`dismiss` は補完の慣例どおり `<C-e>` にして、
 `<Esc>` はモード離脱専用に残してください。誤って割り当てた場合は `:verbose imap <Esc>` で犯人を確認できます。
 :::
 

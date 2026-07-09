@@ -140,7 +140,7 @@ fzf --preview 'cat {}'              # 右にプレビューを出しながら選
 <!-- ↑ 差し込み予定: `nvim "$(fzf)"` で README.md を選択→開く gif。images/ 配下に fzf-nvim.gif を置く -->
 
 :::message
-**fzf のシェル統合（任意）**: `~/.zshrc` に fzf のキーバインドを読み込むと、`Ctrl-R`（履歴のあいまい検索）・`Ctrl-T`（カレント配下のファイル挿入）・`Alt-C`（ディレクトリ移動）が使えます。導入は `$(brew --prefix)/opt/fzf/install` か、`source <(fzf --zsh)`（新しめの版）。本書の必須ではないので、気に入ったら足してください。
+**fzf のシェル統合（任意）**: `~/.zshrc` に fzf のキーバインドを読み込むと、`Ctrl-r`（履歴のあいまい検索）・`Ctrl-t`（カレント配下のファイル挿入）・`Alt-c`（ディレクトリ移動）が使えます。導入は `$(brew --prefix)/opt/fzf/install` か、`source <(fzf --zsh)`（新しめの版）。本書の必須ではないので、気に入ったら足してください。
 :::
 
 ## まとめ — 3 つの役割
